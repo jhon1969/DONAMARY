@@ -211,9 +211,9 @@ const Guests = {
      * Selecciona opción en escala
      */
     selectScale(question, value) {
-        const container = question === 'coexistence' ? 
-            document.getElementById('coexistenceScale') : 
-            document.getElementById('emotionalScale');
+        const container = question === 'coexistence'
+            ? document.getElementById('coexistenceScale')
+            : document.getElementById('emotionalScale');
 
         // Remover selección anterior
         container.querySelectorAll('.scale-option').forEach(opt => {
@@ -221,10 +221,14 @@ const Guests = {
         });
 
         // Marcar nueva selección
-        event.target.classList.add('selected');
-        
+        // Si el click fue en el span, buscar el label padre
+        let label = event.target.closest('label');
+        if (label) {
+            label.querySelector('input[type="radio"]').checked = true;
+            label.querySelector('.scale-option').classList.add('selected');
+        }
+
         this.formData.questionnaire[question] = parseInt(value);
-        document.querySelector(`input[name="${question}"][value="${value}"]`).checked = true;
     },
 
     /**

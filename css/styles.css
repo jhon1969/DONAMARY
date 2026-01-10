@@ -519,9 +519,20 @@ textarea {
 }
 
 .scale-options {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .scale-options {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .scale-option {
+        font-size: 1rem;
+        padding: 1rem;
+    }
 }
 
 .scale-option {
