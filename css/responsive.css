@@ -1,0 +1,295 @@
+/* ========================================
+   MOBILE-FIRST RESPONSIVE DESIGN
+   ======================================== */
+
+/* ========================================
+   MOBILE (< 768px) - ESTILOS POR DEFECTO
+   ======================================== */
+
+/* Mostrar tab-bar en mobile */
+@media (max-width: 767px) {
+    nav.tab-bar {
+        display: flex;
+    }
+
+    main {
+        padding-bottom: 8rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .container {
+        padding: 1rem 0.75rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row.three {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 0.65rem;
+        font-size: 16px; /* Evita zoom en iOS */
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+    .scale-options {
+        flex-wrap: wrap;
+    }
+
+    .room-actions {
+        flex-direction: column;
+    }
+
+    .room-actions .btn {
+        flex: none;
+    }
+
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* Ocultar navegación horizontal en mobile */
+    nav:not(.tab-bar) {
+        display: none;
+    }
+}
+
+/* ========================================
+   TABLET (768px - 1023px)
+   ======================================== */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-row.three {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    main {
+        padding-bottom: 2rem;
+    }
+
+    nav.tab-bar {
+        display: none;
+    }
+
+    header .container {
+        flex-direction: row;
+    }
+
+    .modal-content {
+        width: 85%;
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* ========================================
+   DESKTOP (≥ 1024px)
+   ======================================== */
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-row.three {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    nav.tab-bar {
+        display: none;
+    }
+
+    header {
+        padding: 1.5rem 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        width: 600px;
+        max-width: 90%;
+    }
+
+    main {
+        padding-bottom: 2rem;
+    }
+
+    /* Grid mejorado para 21 habitaciones */
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* ========================================
+   EXTRA LARGE (≥ 1440px)
+   ======================================== */
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* ========================================
+   ORIENTACIÓN LANDSCAPE
+   ======================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    header {
+        padding: 0.75rem 0;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    main {
+        padding-bottom: 5rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   ACCESIBILIDAD Y PREFERENCIAS DEL USUARIO
+   ======================================== */
+
+/* Respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Modo oscuro (si lo implementas en el futuro) */
+@media (prefers-color-scheme: dark) {
+    /* Aquí van los estilos para dark mode */
+}
+
+/* Pantallas de alta densidad de píxeles */
+@media (min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    /* Optimizaciones para pantallas retina */
+}
+
+/* ========================================
+   IMPRESIÓN
+   ======================================== */
+
+@media print {
+    nav.tab-bar,
+    header,
+    footer {
+        display: none;
+    }
+
+    body {
+        background-color: var(--white);
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid var(--light-gray);
+    }
+}
