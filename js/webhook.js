@@ -5,7 +5,7 @@
 
 const Webhook = {
     // Reemplazar con tu webhook URL de Make
-    MAKE_WEBHOOK_URL: https://hook.us2.make.com/kpj8y9q5yssx923fmwimulo4ye2sbbvq,
+    MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/kpj8y9q5yssx923fmwimulo4ye2sbbvq',
     
     
     /**
@@ -26,7 +26,8 @@ const Webhook = {
                     roomId: guestData.roomId,
                     checkInDate: guestData.checkInDate,
                     checkOutDate: guestData.checkOutDate,
-                    notes: guestData.notes
+                    notes: guestData.notes,
+                    evaluation: guestData.evaluation
                 }
             };
             
@@ -152,7 +153,8 @@ const Webhook = {
                     roomId: guest.roomId,
                     checkInDate: guest.checkInDate,
                     checkOutDate: guest.checkOutDate,
-                    notes: guest.notes
+                    notes: guest.notes,
+                    evaluation: guest.evaluation
                 }))
             };
             
