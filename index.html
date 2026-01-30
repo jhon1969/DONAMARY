@@ -5,33 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Residencias Doña Mary - Disponibilidad de Habitaciones</title>
+    <meta name="description" content="Residencias Doña Mary - Hospedaje en Bucaramanga. Consulta la disponibilidad de habitaciones y gestiona tu estancia.">
+    <meta name="theme-color" content="#0E6B5B">
+    <title>Residencias Doña Mary - Disponibilidad de Habitaciones | Hospedaje Bucaramanga</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <header>
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="header-row">
                 <div>
-                    <h1>🏠 Doña Mary</h1>
+                    <h1><span aria-hidden="true">🏠</span> Doña Mary</h1>
                     <div class="logo-text">Residencias & Hospedaje</div>
                 </div>
-                <div style="text-align: right; font-size: 0.9rem; color: white;">
-                    <button class="btn btn-primary" style="margin-bottom: 0.5rem; padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="App.showAdminPassword()">🔐 Admin</button>
-                    <button class="btn btn-primary" style="margin-bottom: 0.5rem; padding: 0.5rem 1rem; font-size: 0.85rem; display: block; margin-left: auto;" onclick="App.showSection('reportes')">📋 Reportes</button>
-                    <div id="clock" style="font-size: 1.2rem; font-weight: bold; color: white;">00:00:00</div>
-                    <div id="date" style="margin-top: 0.5rem; color: white;">--/--/----</div>
-                    <div style="margin-top: 0.5rem; color: white; font-weight: bold;">📍 Bucaramanga</div>
+                <div class="header-meta">
+                    <button type="button" class="btn btn-primary btn-header" onclick="App.showAdminPassword()" aria-label="Abrir panel de administrador"><span aria-hidden="true">🔐</span> Admin</button>
+                    <button type="button" class="btn btn-primary btn-header btn-header-block" onclick="App.showSection('reportes')" aria-label="Ir a reportes"><span aria-hidden="true">📋</span> Reportes</button>
+                    <div id="clock" class="header-clock" aria-live="polite" aria-atomic="true">00:00:00</div>
+                    <div id="date" class="header-date" aria-live="polite">--/--/----</div>
+                    <div class="header-location"><span aria-hidden="true">📍</span> Bucaramanga</div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container" role="main">
         <!-- SECCIÓN DISPONIBILIDAD -->
-        <section id="disponibilidad" class="section active">
-            <h2 class="section-title">Disponibilidad de Habitaciones</h2>
+        <section id="disponibilidad" class="section active" aria-labelledby="titulo-disponibilidad" aria-hidden="false">
+            <h2 id="titulo-disponibilidad" class="section-title">Disponibilidad de Habitaciones</h2>
 
             <div id="roomsContainer" class="grid rooms-grid">
                 <!-- Las habitaciones se cargarán aquí dinámicamente -->
@@ -39,34 +42,34 @@
         </section>
 
         <!-- SECCIÓN REGISTRO -->
-        <section id="registro" class="section" style="display: none;">
-            <h2 class="section-title">Registro de Huésped</h2>
+        <section id="registro" class="section" aria-labelledby="titulo-registro" aria-hidden="true">
+            <h2 id="titulo-registro" class="section-title">Registro de Huésped</h2>
             <div id="registroContent"></div>
         </section>
 
         <!-- SECCIÓN MANUAL -->
-        <section id="manual" class="section" style="display: none;">
-            <h2 class="section-title">Manual de Convivencia</h2>
+        <section id="manual" class="section" aria-labelledby="titulo-manual" aria-hidden="true">
+            <h2 id="titulo-manual" class="section-title">Manual de Convivencia</h2>
             <div id="manualContent"></div>
         </section>
 
         <!-- SECCIÓN ADMIN -->
-        <section id="admin" class="section" style="display: none;">
-            <h2 class="section-title">Panel de Administrador</h2>
+        <section id="admin" class="section" aria-labelledby="titulo-admin" aria-hidden="true">
+            <h2 id="titulo-admin" class="section-title">Panel de Administrador</h2>
             <div id="adminContent"></div>
         </section>
 
         <!-- SECCIÓN REPORTES -->
-        <section id="reportes" class="section" style="display: none;">
-            <h2 class="section-title">Reportar Daños o Sugerencias</h2>
+        <section id="reportes" class="section" aria-labelledby="titulo-reportes" aria-hidden="true">
+            <h2 id="titulo-reportes" class="section-title">Reportar Daños o Sugerencias</h2>
             <div id="reportesContent"></div>
         </section>
     </main>
 
     <!-- NAVEGACIÓN TAB-BAR MÓVIL -->
-    <nav class="tab-bar">
-        <ul>
-            <li><a href="#" onclick="App.showSection('disponibilidad')" class="active"><span class="tab-icon">🏠</span>Inicio</a></li>
+    <nav class="tab-bar" aria-label="Navegación principal">
+        <ul role="list">
+            <li><a href="#disponibilidad" onclick="App.showSection('disponibilidad'); return false;" class="active" aria-current="page"><span class="tab-icon" aria-hidden="true">🏠</span>Inicio</a></li>
             <!-- <li><a href="#" onclick="App.showSection('admin')"><span class="tab-icon">⚙️</span>Admin</a></li> -->
             <!-- <li><a href="#" onclick="App.showSection('reportes')"><span class="tab-icon">📝</span>Reportes</a></li> -->
         </ul>

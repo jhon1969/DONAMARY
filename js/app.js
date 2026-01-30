@@ -237,6 +237,7 @@ const App = {
         document.querySelectorAll('section.section').forEach(section => {
             section.classList.remove('active');
             section.style.display = 'none';
+            section.setAttribute('aria-hidden', 'true');
         });
 
         // Mostrar sección seleccionada
@@ -244,13 +245,19 @@ const App = {
         if (section) {
             section.classList.add('active');
             section.style.display = 'block';
+            section.setAttribute('aria-hidden', 'false');
         }
 
         // Actualizar tab-bar si existe
         document.querySelectorAll('nav.tab-bar a').forEach(link => {
             link.classList.remove('active');
+            link.removeAttribute('aria-current');
         });
-        document.querySelector(`nav.tab-bar a[onclick*="'${sectionId}'"]`)?.classList.add('active');
+        const activeLink = document.querySelector(`nav.tab-bar a[onclick*="'${sectionId}'"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+            activeLink.setAttribute('aria-current', 'page');
+        }
 
         this.state.currentSection = sectionId;
 
