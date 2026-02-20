@@ -5,7 +5,7 @@
 
 const Webhook = {
     // Reemplazar con tu webhook URL de Make
-    MAKE_WEBHOOK_URL: https://hook.us2.make.com/g7btet1pcefytq02a0gh5rrbgwudb62r,
+    MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/miyug9nyglks68bsgx7ufd9k8754y594',
     /**
      * Envía datos de un nuevo huésped a Make
      */
