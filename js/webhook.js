@@ -1,11 +1,23 @@
 /**
  * Webhook.js - Integración con Make (antes Integromat)
  * Envía datos a Make para sincronización con Google Sheets
+ * VERSIÓN CON PROXY CORS
  */
 
 const Webhook = {
-    // Reemplazar con tu webhook URL de Make
+    // URL directa de Make (NO MODIFICAR)
     MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/u55ehei97sgeyxqk9wnna05bs6ao7fp5',
+    
+    // Proxy CORS (puente para evitar el error)
+    PROXY_URL: 'https://cors-anywhere.herokuapp.com/',
+    
+    /**
+     * Función auxiliar para obtener la URL completa con proxy
+     */
+    getFullUrl() {
+        return this.PROXY_URL + this.MAKE_WEBHOOK_URL;
+    },
+
     /**
      * Envía datos de un nuevo huésped a Make
      */
@@ -29,7 +41,7 @@ const Webhook = {
                 }
             };
             
-            const response = await fetch(this.MAKE_WEBHOOK_URL, {
+            const response = await fetch(this.getFullUrl(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +82,7 @@ const Webhook = {
                 }
             };
             
-            const response = await fetch(this.MAKE_WEBHOOK_URL, {
+            const response = await fetch(this.getFullUrl(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -111,7 +123,7 @@ const Webhook = {
                 }))
             };
             
-            const response = await fetch(this.MAKE_WEBHOOK_URL, {
+            const response = await fetch(this.getFullUrl(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -156,7 +168,7 @@ const Webhook = {
                 }))
             };
             
-            const response = await fetch(this.MAKE_WEBHOOK_URL, {
+            const response = await fetch(this.getFullUrl(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -198,7 +210,7 @@ const Webhook = {
                 }))
             };
             
-            const response = await fetch(this.MAKE_WEBHOOK_URL, {
+            const response = await fetch(this.getFullUrl(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -221,9 +233,12 @@ const Webhook = {
 
     /**
      * Sincroniza TODO (habitaciones, huéspedes, reportes)
+     * Esta es la función que llama admin.js
      */
     async syncAll() {
         try {
+            App.showToast('📤 Enviando datos a Make...', 'info');
+            
             const results = await Promise.all([
                 this.syncAllRooms(),
                 this.syncAllGuests(),
@@ -231,6 +246,13 @@ const Webhook = {
             ]);
             
             const allSuccess = results.every(r => r === true);
+            
+            if (allSuccess) {
+                console.log('✓ Sincronización completada con Make');
+            } else {
+                console.warn('⚠️ Algunos datos no se sincronizaron correctamente');
+            }
+            
             return allSuccess;
         } catch (error) {
             console.error('Error en sincronización total:', error);
@@ -238,7 +260,3 @@ const Webhook = {
         }
     }
 };
-
-
-
-
