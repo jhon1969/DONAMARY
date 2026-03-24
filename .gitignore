@@ -1,0 +1,17 @@
+# Dependencias (Lo más pesado)
+node_modules/
+jspm_packages/
+
+# Archivos de sistema y editores
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Variables de entorno (Seguridad)
+.env
+*.env.local
+
+# Carpetas de compilación
+dist/
+build/
+out/
