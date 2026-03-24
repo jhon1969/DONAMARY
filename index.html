@@ -87,5 +87,34 @@
     <script src="js/guests.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/reports.js"></script>
+    <script>
+  // Esta función se activa cuando alguien envía un formulario
+  async function enviarDatos(event) {
+    event.preventDefault(); // Evita que la página se recargue
+
+    const datos = {
+      tipo: "Prueba inicial",
+      mensaje: "Hola desde el index.html de Dona Mary"
+    };
+
+    try {
+      const respuesta = await fetch('http://localhost:3000/api/form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos) // Convierte el objeto a texto para el servidor
+      });
+
+      const resultado = await respuesta.json();
+      console.log("Respuesta del servidor:", resultado);
+      alert("¡Conexión exitosa! Mira la terminal de VS Code.");
+      
+    } catch (error) {
+      console.error("Error al conectar:", error);
+      alert("No se pudo conectar con el backend.");
+    }
+  }
+</script>
 </body>
 </html>
