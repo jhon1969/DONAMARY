@@ -42,9 +42,6 @@ app.post('/api/form', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-});
 // RUTA TEMPORAL PARA CREAR LAS TABLAS
 app.get('/crear-tablas', async (req, res) => {
   try {
@@ -90,3 +87,7 @@ app.get('/crear-tablas', async (req, res) => {
     res.status(500).send("❌ Error: " + err.message);
   }
 });
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+})
