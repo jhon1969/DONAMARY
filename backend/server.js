@@ -12,10 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Conexión a PostgreSQL
+// Conexión a PostgreSQL (Corregida para Render)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  ssl: {
+    rejectUnauthorized: false // Esto permite la conexión segura con Render
+  }
 });
 
 // Ruta principal de prueba
