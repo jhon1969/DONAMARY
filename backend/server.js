@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 const fs = require('fs');
-const csvParser = require('csv-parser');
+const csvParser = require('csv-parser'); // Esta es la "herramienta"
 
 app.get('/importar-habitaciones', async (req, res) => {
   const resultados = [];
