@@ -20,7 +20,7 @@ app.get('/cargar-habitaciones', async (req, res) => {
   const resultados = [];
   
   // Asegúrate que el archivo se llame exactamente así en tu carpeta
-  fs.createReadStream('./DONAMARY.xlsx - Habitaciones.csv') 
+  fs.createReadStream('./Habitaciones.csv') 
     .pipe(csvParser())
     .on('data', (data) => resultados.push(data))
     .on('end', async () => {
