@@ -16,7 +16,7 @@ app.use(express.json());
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // Esto permite la conexión segura con Render
+    rejectUnauthorized: false
   }
 });
 
