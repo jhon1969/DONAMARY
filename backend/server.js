@@ -20,8 +20,8 @@ const pool = new Pool({
   }
 });
 
-import fs from 'fs';
-import csv from 'csv-parser';
+iimport fs from 'fs';
+import csvParser from 'csv-parser'; // Cambiamos el nombre aquí
 
 app.get('/importar-habitaciones', async (req, res) => {
   const resultados = [];
@@ -68,23 +68,31 @@ app.post('/api/form', async (req, res) => {
   }
 });
 
-// RUTA PARA CREAR TABLAS (Ponla aquí arriba para que el servidor la vea primero)
-app.get('/crear-todo', async (req, res) => {
-  console.log("Recibida petición para crear tablas..."); 
-  try {
-    const querySQL = `
-      CREATE TABLE IF NOT EXISTS habitaciones (id SERIAL PRIMARY KEY, number VARCHAR(10), piso INT, type VARCHAR(50), capacity INT, price DECIMAL(10, 2), status VARCHAR(20));
-      CREATE TABLE IF NOT EXISTS huespedes (id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100), phone VARCHAR(20), dni VARCHAR(20) UNIQUE, address TEXT, room_id INT, check_in_date DATE, check_out_date DATE, notes TEXT);
-      CREATE TABLE IF NOT EXISTS reportes (id SERIAL PRIMARY KEY, type VARCHAR(50), title VARCHAR(100), description TEXT, location VARCHAR(100), priority VARCHAR(20), status VARCHAR(20), created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-    `;
-    await pool.query(querySQL);
-    res.send("<h1>✅ ¡Tablas creadas con éxito!</h1>");
-  } catch (err) {
-    console.error("Error en la base de datos:", err);
-    res.status(500).send("Error: " + err.message);
-  }
+// --- COPIA DESDE AQUÍ ---
+app.get('/cargar-habitaciones', async (req, res) => {
+  const resultados = [];
+  
+  // 1. Abrimos el archivo Excel (CSV)
+  fs.createReadStream('./DONAMARY.xlsx - Habitaciones.csv') 
+    .pipe(csvParser()) // <--- AQUÍ ESTÁ EL CAMBIO: Usamos el nombre nuevo
+    .on('data', (data) => resultados.push(data))
+    .on('end', async () => {
+      try {
+        // 2. Guardamos cada fila en la base de datos de Render
+        for (const fila of resultados) {
+          await pool.query(
+            'INSERT INTO habitaciones (number, piso, type, capacity, price, status) VALUES ($1, $2, $3, $4, $5, $6)',
+            [fila.number, fila.piso, fila.type, fila.capacity, fila.price, fila.status]
+          );
+        }
+        res.send(`<h1>✅ ¡Éxito! Se guardaron ${resultados.length} habitaciones en la base de datos.</h1>`);
+      } catch (err) {
+        console.error("Error al guardar:", err.message);
+        res.status(500).send("Error: " + err.message);
+      }
+    });
 });
-
+// --- HASTA AQUÍ ---
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 })
