@@ -20,8 +20,8 @@ const pool = new Pool({
   }
 });
 
-iimport fs from 'fs';
-import csvParser from 'csv-parser'; // Cambiamos el nombre aquí
+const fs = require('fs');
+const csvParser = require('csv-parser');
 
 app.get('/importar-habitaciones', async (req, res) => {
   const resultados = [];
