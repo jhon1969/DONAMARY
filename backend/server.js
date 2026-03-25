@@ -20,6 +20,30 @@ const pool = new Pool({
   }
 });
 
+import fs from 'fs';
+import csv from 'csv-parser';
+
+app.get('/importar-habitaciones', async (req, res) => {
+  const resultados = [];
+  // Asegúrate de que el nombre del archivo sea exactamente el que tienes en tu carpeta
+  fs.createReadStream('../DONAMARY.xlsx - Habitaciones.csv') 
+    .pipe(csv())
+    .on('data', (data) => resultados.push(data))
+    .on('end', async () => {
+      try {
+        for (const fila of resultados) {
+          await pool.query(
+            'INSERT INTO habitaciones (number, piso, type, capacity, price, status) VALUES ($1, $2, $3, $4, $5, $6)',
+            [fila.number, fila.piso, fila.type, fila.capacity, fila.price, fila.status]
+          );
+        }
+        res.send(`<h1>✅ Se importaron ${resultados.length} habitaciones con éxito.</h1>`);
+      } catch (err) {
+        res.status(500).send("Error al insertar: " + err.message);
+      }
+    });
+});
+
 // Ruta principal de prueba
 app.get('/', (req, res) => {
   res.json({ message: "Backend de DONAMARY funcionando ✅" });
